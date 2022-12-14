@@ -11,9 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AdresseComponent } from './adresse/adresse.component';
 import { RouterModule} from '@angular/router';
+import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [LoginComponent, AdresseComponent],
+  declarations: [AppComponent, LoginComponent, AdresseComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +28,6 @@ import { RouterModule} from '@angular/router';
     RouterModule,
   ],
   providers: [],
-  bootstrap: [LoginComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
