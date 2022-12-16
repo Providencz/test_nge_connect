@@ -7,7 +7,7 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { AdresseService } from '../service/adresse.service';
 
@@ -17,12 +17,20 @@ import { AdresseService } from '../service/adresse.service';
   styleUrls: ['./adresse.component.scss'],
 })
 export class AdresseComponent implements OnInit {
-  searchObject: FormControl = new FormControl('', Validators.required);
+  searchObject: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+    this.searchValidator(),
+  ]);
+  loaded: boolean = false;
   adresseSubscription: Subscription = new Subscription();
   displayedColumns: string[] = ['numero', 'voie', 'code_postal', 'ville'];
-  dataSource = [];
+  dataSource: any;
 
-  constructor(private _adresseService: AdresseService) {}
+  constructor(
+    private _adresseService: AdresseService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
 
@@ -31,15 +39,33 @@ export class AdresseComponent implements OnInit {
   }
 
   search() {
-    let data =
-      this.searchObject.value && this.searchObject.value.replace(/\s/g, '+');
+    let data = this.searchObject.value && this.searchObject.value.match(/\S+/g);
+    data = data.join('+');
     this.adresseSubscription = this._adresseService
       .getAdresseData(data)
-      .subscribe((data: any) => {
-        this.dataSource = data.features.map((element: any) =>
-          this._adresseService.formatDataProvided(element)
-        );
-        console.log('Formatted data : ', this.dataSource);
+      .subscribe({
+        next: (data: any) => {
+          this.loaded = true;
+          this.dataSource = data.features.map((element: any) =>
+            this._adresseService.formatDataProvided(element)
+          );
+        },
+        error: (error: any) => {
+          console.error("Error details : ", error);
+          this._snackBar.open('Erreur lors de la récupération de données, veuillez réessayer.', 'Ok');
+        },
       });
+  }
+
+  searchValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      let value = control.value;
+      if (!value) {
+        return null;
+      }
+      let whitespaceCheck = value.match(/\S+/g);
+      let searchCheck = whitespaceCheck && whitespaceCheck.join('').length >= 3;
+      return !searchCheck ? { searchValidation: true } : null;
+    };
   }
 }
