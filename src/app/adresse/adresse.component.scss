@@ -1,8 +1,17 @@
-.container {
+.formContainer {
   margin: auto;
   width: fit-content;
   height: fit-content;
   padding: 1rem;
+}
+.tableContainer{
+  margin: auto;
+  width: 50%;
+  height: 40%;
+  overflow-y: auto;
+}
+table{
+  width: 100%;
 }
 form {
   display: flex;
