@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AdresseComponent } from './adresse.component';
 
@@ -8,9 +10,9 @@ describe('AdresseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdresseComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule, MatSnackBarModule],
+      declarations: [AdresseComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AdresseComponent);
     component = fixture.componentInstance;
