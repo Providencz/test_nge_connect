@@ -3,7 +3,7 @@
   <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
     <mat-form-field appearance="fill">
       <mat-label>Mail</mat-label>
-      <input matInput formControlName="mail" required />
+      <input matInput formControlName="mail" autocomplete="off" required />
       <mat-error *ngIf="loginForm.get('mail')?.invalid"
         >Entrez un email valide.</mat-error
       >
@@ -14,6 +14,7 @@
         matInput
         [type]="hide ? 'password' : 'text'"
         formControlName="password"
+        autocomplete="off"
         required
       />
       <mat-error *ngIf="loginForm.get('password')?.invalid"

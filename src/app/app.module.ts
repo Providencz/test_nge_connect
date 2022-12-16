@@ -6,12 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AdresseComponent } from './adresse/adresse.component';
-import { RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, AdresseComponent],
@@ -25,7 +27,9 @@ import { AppComponent } from './app.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatTableModule,
     RouterModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
