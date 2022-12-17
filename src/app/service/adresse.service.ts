@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AdresseService {
+  testVal: string = 'test';
+
   constructor(private _http: HttpClient) {}
 
   getAdresseData(options: any) {

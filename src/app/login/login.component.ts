@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   submitForm() {
-    this.router.navigate(['/','adresse'])
+    this.router.navigateByUrl('/adresse');
   }
 
   passwordValidator(): ValidatorFn {
