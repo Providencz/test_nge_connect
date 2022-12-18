@@ -3,9 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AdresseComponent } from './adresse.component';
+import { AdresseService } from '../service/adresse.service';
 
 describe('AdresseComponent', () => {
   let component: AdresseComponent;
+  let adresseService: AdresseService;
   let fixture: ComponentFixture<AdresseComponent>;
 
   beforeEach(async () => {
@@ -16,6 +18,7 @@ describe('AdresseComponent', () => {
 
     fixture = TestBed.createComponent(AdresseComponent);
     component = fixture.componentInstance;
+    adresseService = TestBed.inject(AdresseService);
     fixture.detectChanges();
   });
 
